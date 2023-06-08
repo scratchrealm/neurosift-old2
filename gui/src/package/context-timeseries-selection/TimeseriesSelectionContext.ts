@@ -53,10 +53,11 @@ const TimeseriesSelectionContext = React.createContext<TimeseriesSelectionContex
     timeseriesSelectionDispatch: stubTimeseriesSelectionDispatch
 })
 
-export const useTimeseriesSelectionInitialization = (start: number, end: number, timeOffset=0) => {
+export const useTimeseriesSelectionInitialization = (start: number | undefined, end: number | undefined, timeOffset=0) => {
     const { timeseriesSelection, timeseriesSelectionDispatch } = useContext(TimeseriesSelectionContext)
 
     useEffect(() => {
+        if (start === undefined || end === undefined) return
         if (timeseriesSelection.timeseriesStartTimeSec === start + timeOffset &&
             timeseriesSelection.timeseriesEndTimeSec === end + timeOffset) return
 
